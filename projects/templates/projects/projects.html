@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container my-3">
+    <div class="row d-flex justify-content-center align-items-center my-3">
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="text-center pt-3 pb-2">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check" height="60px" width="60px" />
+              <h1 class="mx-3" style="display: inline-block; vertical-align: middle;">Projects</h1>
+            </div>
+            <div class="text-center my-3">
+              <a class="nav-link btn btn-primary text-light" href="{% url 'create-project' %}">Create Project</a>
+            </div>
+            <div class="row my-5">
+              {% for project in projects %}
+                <div class="col-md-4" style="border-top: 200px;">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ project.name }}</h5>
+                      <p class="card-text">{{ project.description|truncatechars:150 }}</p>
+                      <a href="{% url 'project-detail' project.id %}" class="btn btn-primary">More Details</a>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

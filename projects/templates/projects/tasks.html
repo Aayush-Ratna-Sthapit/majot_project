@@ -1,0 +1,62 @@
+<!-- tasks.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+   <section class="">
+      <div class="container my-3">
+         <div class="row d-flex justify-content-center align-items-center my-3">
+            <div class="col-xl-12">
+               <div class="card">
+                  <div class="card-body p-4">
+                     <div class="text-center pt-3 pb-2">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check" height="60px" width="60px"/>
+                        <h1 class="mx-3" style="display: inline-block; vertical-align: middle;">Task List</h1>
+                     </div>
+                     <div class="text-center">
+                        <a class="nav-link btn btn-primary text-light" href={% url 'create-task'%}>Add Task</a>
+                     </div>
+                     <table class="table">
+                        <thead>
+                           <tr>
+                              <th scope="col">Assignee</th>
+                              <th scope="col">Task</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">Due Date</th>
+                              <th scope="col">Project</th>
+                              <th scope="col">Actions</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           {% for task in tasks %}
+                              <tr class="fw-normal">
+                                 <th class="border-0">
+                                    <span class="ms-2">{{ task.assignee }}</span>
+                                 </th>
+                                 <td class="border-0 align-middle">
+                                    <a href="{% url 'task-detail' task.id %}" data-mdb-toggle="tooltip" title="Done">{{ task.title }}</a>
+                                 </td>
+                                 <td class="border-0 align-middle">
+                                    <h6 class="mb-0"><span class="badge bg-success">{{ task.status }}</span></h6>
+                                 </td>
+                                 <td class="border-0 align-middle">{{ task.due_date }}</td>
+                                 <td class="border-0 align-middle">
+                                    <h6 class="mb-0"><span class="badge bg-success">{{ task.project }}</span></h6>
+                                 </td>
+                                 <td class="border-0 align-middle">
+                                    <a href="{% url 'update-task' task.id %}" data-mdb-toggle="tooltip" title="Done"><i class="fas fa-check fa-lg text-success me-3">Update</i></a>
+                                 </td>
+                              </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+      </div>
+   </section>
+{% endblock %}
+
+
