@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Task,Project
+from .models import *
 
 from django.forms import DateInput
 
@@ -15,3 +15,8 @@ class ProjectForm(ModelForm):
   class Meta:
       model =Project
       fields ='__all__'
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['name','email','bio','photo']
