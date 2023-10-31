@@ -23,7 +23,6 @@ def registration(request):
     return render(request, 'users/registration.html', context)
 
 
-
 class UserLoginView(LoginView):
     template_name = 'users/login.html'
     form = AuthenticationForm
@@ -52,9 +51,10 @@ def update_profile(request):
 
 
 from django.shortcuts import render
+
 # Create your views here.
 def home(request):
-  return render(request, 'index.html')
+  return render(request, 'base.html')
  
 def projects(request):
   return render(request, 'projects/projects.html')
