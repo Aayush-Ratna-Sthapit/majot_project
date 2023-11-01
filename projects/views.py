@@ -14,6 +14,8 @@ from django.contrib.auth import login,logout
 from django.contrib.auth.views import LoginView
 # Create your views here.
 
+#-------------------------------------User Profile-----------------------------------------------------------
+
 @login_required
 def userProfile(request):
     curr_user = request.user
@@ -23,7 +25,8 @@ def userProfile(request):
     }
     return render(request, 'projects/userProfile.html', context)
 
-               
+#-----------------------------------Display Lists--------------------------------------------------------------
+
 @login_required
 def projectList(request):
    projects = Project.objects.all()
@@ -55,6 +58,12 @@ def taskDetail(request,pk):
   context = {'task':task}
   return render(request, 'projects/task-detail.html',context)
 
+def userList(request):
+    users = Profile.objects.all()
+    context = {'users': users}
+    return render(request, 'projects/users.html', context)
+
+#-----------------------------------------CUD views----------------------------------------------------
 
 @login_required
 def taskCreate(request):
@@ -64,7 +73,6 @@ def taskCreate(request):
        if form.is_valid():
            form.save()   
            return redirect('tasks')
-
 
    context = {'form':form}
    return render(request, 'projects/task-create.html',context)
@@ -117,7 +125,7 @@ def joinTask(request,pk):
 # Create your views here.
 def projects(request):
     projects = Project.objects.all()
-    context = {'projects': 'projects'}
+    context = {'projects': projects}
     return render(request, 'projects/projects.html',context)
 
 def registration(request):

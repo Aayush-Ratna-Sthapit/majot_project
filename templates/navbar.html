@@ -1,65 +1,42 @@
 {% load static %}
+{% load custom_filters %}
 
 <nav class="navbar navbar-expand-lg navbar-dark text-dark" style="background-color: #111827;">
-   <div class="container-fluid">
-      <a class="navbar-brand mx-5" href="{% url 'projects' %}">
-         <img src="{% static 'img/logo.png' %}" alt="Logo" height="50px">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-      </button>
-      {% if request.user.is_authenticated %}
+  <div class="container-fluid">
+    <a class="navbar-brand mx-5" href="{% url 'projects' %}"><img src="{% static 'img/logo.png' %}" alt="Logo" height="50px" /></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    {% if request.user.is_authenticated %}
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item mx-1 fs-4">
+            <a class="nav-link" href="{% url 'user-profile' %}">Profile</a>
+          </li>
+          <li class="nav-item mx-1 fs-4">
+            <a class="nav-link" href="{% url 'projects' %}">Projects</a>
+          </li>
+          <li class="nav-item mx-1 fs-4">
+            <a class="nav-link" href="{% url 'tasks' %}">Tasks</a>
+          </li>
+          {% if request.user|has_group:'admin' %}
             <li class="nav-item mx-1 fs-4">
-               <a class="nav-link" href="{% url 'user-profile' %}">Profile</a>
+              <a class="nav-link" href="{% url 'user-list' %}">Users</a>
             </li>
-            <li class="nav-item mx-1 fs-4">
-               <a class="nav-link" href="{% url 'projects' %}">Projects</a>
-            </li>
-            <li class="nav-item mx-1 fs-4">
-               <a class="nav-link" href="{% url 'tasks' %}">Tasks</a>
-            </li>
-            {% if request.user.is_admin %}
-            <li class="nav-item mx-1 fs-4">
-               <a class="nav-link" href="{% url 'users' %}">Users</a>
-            </li>
-            {% endif %}
-         </ul>
+          {% endif %}
+        </ul>
       </div>
       <a class="btn btn-danger" href="{% url 'logout' %}" role="button">Logout</a>
-      {% else %}
+    {% else %}
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         <li class="nav-item mx-1 fs-4">
-            <a class="nav-link" href="{% url 'home' %}">Home</a>
-         </li>
+        <li class="nav-item mx-1 fs-4">
+          <a class="nav-link" href="{% url 'home' %}">Home</a>
+        </li>
       </ul>
       <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
-      {% endif %}
-   </div>
+    {% endif %}
+  </div>
 </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--{% load static %}
+<!--   {% load static %}
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-dark">
    <div class="container-fluid">
@@ -85,4 +62,4 @@
    </div>
    </div>
    </div>
-</nav> -->
+</nav>    -->

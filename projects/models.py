@@ -10,7 +10,7 @@ class Profile(models.Model):
     user_groups = models.ManyToManyField(Group, blank=True)
     name = models.CharField(max_length=200,null=True,blank=True)
     email = models.EmailField(blank=True,null=True)
-    photo =models.ImageField(null=True,blank=True)
+    photo = models.ImageField(null=True,blank=True)
     bio = models.TextField(null=True,blank=True)
 
     def __str__(self):

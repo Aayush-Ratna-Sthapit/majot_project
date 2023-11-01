@@ -20,5 +20,16 @@
              window.history.back();
          }
       </script>
+      <script>
+         // Get the user group from a variable that you set in your template context.
+         var isUserAdmin = {{ is_admin|yesno:"true,false" }};
+         if (isUserAdmin) {
+            // If the user is an admin, show the "Users" button.
+            document.getElementById("users-button").style.display = "block";
+         } else {
+            // If the user is not an admin, hide the "Users" button.
+            document.getElementById("users-button").style.display = "none";
+         }
+      </script>
    </body>
 </html>

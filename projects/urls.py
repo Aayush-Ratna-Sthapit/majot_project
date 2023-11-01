@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.projectList, name='index'),  # Handle the empty path with the 'index' view
 
     path('profile/', views.userProfile, name='user-profile'),
+    path('users/', views.userList, name='user-list'),
 
     path('projects', views.projectList, name='projects'),
     path('projects/<int:pk>', views.projectDetail, name='project-detail'), 
