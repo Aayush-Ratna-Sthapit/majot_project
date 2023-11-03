@@ -2,57 +2,69 @@
 {% load static %}
 
 {% block content %}
-   <section>
-      <div class="container my-3">
-         <div class="row d-flex justify-content-center align-items-center my-3">
-            <div class="col-xl-12">
-               <div class="card my-5">
-                  <div class="card-body p-4">
-                     <div class="text-center pt-3 pb-2">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check" height="60px" width="60px" />
-                        <h1 class="mx-3" style="display: inline-block; vertical-align: middle;">User List</h1>
-                     </div>
-                     <div class="text-center my-3">
-                        <a class="nav-link btn btn-primary text-light" href="{% url 'register' %}">Add New User</a>
-                        <select class="form-select mt-2" id="user-group-filter" name="user-group-filter">
-                            <option value="">All</option>
-                            <option value="admin">Admin</option>
-                            <option value="manager">Manager</option>
-                            <option value="employee">Employee</option>
-                        </select>
-                     </div>
-                     <table class="table">
-                        <thead>
-                           <tr>
-                              <th scope="col">Name</th>
-                              <th scope="col">Email</th>
-                              <th scope="col">User Group</th>
-                              <th scope="col">Actions</th>
-                           </tr>
-                        </thead>
-                        <tbody>
-                           {% for user in users %}
-                              <tr class="fw-normal">
-                                 <td class="border-0">
-                                    <span class="ms-2">{{ user.name }}</span>
-                                 </td>
-                                 <td class="border-0">
-                                    {{ user.email }}
-                                 </td>
-                                 <td class="border-0">
-                                    {{ user.user_group }}
-                                 </td>
-                                 <td class="border-0">
-                                    <a class="btn btn-success" href="" data-mdb-toggle="tooltip" title="Update">Update</a>
-                                 </td>
-                              </tr>
-                           {% endfor %}
-                        </tbody>
-                     </table>
-                  </div>
-               </div>
+  <section>
+    <div class="container my-3">
+      <div class="row d-flex justify-content-center align-items-center my-3">
+        <div class="col-xl-12">
+          <div class="card my-5">
+            <div class="card-body p-4">
+              <div class="text-center pt-3 pb-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check" height="60px" width="60px" />
+                <h1 class="mx-3" style="display: inline-block; vertical-align: middle;">User List</h1>
+              </div>
+              <div class="text-center my-3">
+                <a class="nav-link btn btn-primary text-light" href="{% url 'register' %}">Add New User</a>
+                <select class="form-select mt-2" id="position-filter" name="position-filter">
+                  <option value="">All</option>
+                  <option value="admin">Admin</option>
+                  <option value="manager">Manager</option>
+                  <option value="employee">Employee</option>
+                </select>
+              </div>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in users %}
+                    <tr class="fw-normal" data-position="{{ user.position }}">
+                      <td class="border-0">
+                        <span class="ms-2">{{ user.name }}</span>
+                      </td>
+                      <td class="border-0">{{ user.email }}</td>
+                      <td class="border-0">{{ user.position }}</td>
+                      <td class="border-0">
+                        <a class="btn btn-success" href="" data-mdb-toggle="tooltip" title="Update">Update</a>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
-         </div>
+          </div>
+        </div>
       </div>
-   </section>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById('position-filter').addEventListener('change', function () {
+      const selectedPosition = this.value
+      const tableRows = document.querySelectorAll('tr[data-position]')
+    
+      tableRows.forEach((row) => {
+        const position = row.getAttribute('data-position')
+        if (selectedPosition === '' || selectedPosition === position) {
+          row.style.display = ''
+        } else {
+          row.style.display = 'none'
+        }
+      })
+    })
+  </script>
 {% endblock %}

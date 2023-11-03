@@ -6,8 +6,14 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Profile(models.Model):
+    POSITION_CHOICES = (
+        ('admin', 'admin'),
+        ('manager', 'manager'),
+        ('employee', 'employee'),
+    )
+
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True)
-    user_groups = models.ManyToManyField(Group, blank=True)
+    position = models.CharField(max_length=50, choices=POSITION_CHOICES,null=True,blank=True)
     name = models.CharField(max_length=200,null=True,blank=True)
     email = models.EmailField(blank=True,null=True)
     photo = models.ImageField(null=True,blank=True)

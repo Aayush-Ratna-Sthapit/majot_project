@@ -4,6 +4,7 @@ from .forms import TaskForm
 from django.views.generic import ListView
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
+from django.db.models import Count
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
@@ -46,10 +47,12 @@ def projectDetail(request,pk):
 
 @login_required
 def taskList(request):
-  tasks = Task.objects.all()
- 
-  context = {'tasks':tasks}
-  return render(request, 'projects/tasks.html',context)
+    tasks = Task.objects.all()
+    assignees = Task.objects.values('assignee').annotate(total=Count('assignee')).distinct()
+    assignee_list = [assignee['assignee'] for assignee in assignees]
+
+    context = {'tasks': tasks, 'assignees': assignee_list}
+    return render(request, 'projects/tasks.html', context)
 
 
 @login_required
