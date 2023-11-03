@@ -48,10 +48,9 @@ def projectDetail(request,pk):
 @login_required
 def taskList(request):
     tasks = Task.objects.all()
-    assignees = Task.objects.values('assignee').annotate(total=Count('assignee')).distinct()
-    assignee_list = [assignee['assignee'] for assignee in assignees]
+    assignees = Profile.objects.filter(task__isnull=False).distinct()
 
-    context = {'tasks': tasks, 'assignees': assignee_list}
+    context = {'tasks': tasks, 'assignees': assignees}
     return render(request, 'projects/tasks.html', context)
 
 

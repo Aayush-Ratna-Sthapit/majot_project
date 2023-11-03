@@ -20,7 +20,7 @@
                      <select class="form-select mt-2" id="assignee-filter" name="assignee-filter">
                         <option value="">All Assignees</option>
                         {% for assignee in assignees %}
-                           <option value="{{ assignee }}">{{ assignee }}</option>
+                           <option value="{{ assignee.name }}">{{ assignee.name }}</option>
                         {% endfor %}
                      </select>
                      <table class="table">

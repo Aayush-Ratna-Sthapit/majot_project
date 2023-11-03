@@ -20,7 +20,7 @@ class Profile(models.Model):
     bio = models.TextField(null=True,blank=True)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.name)
 
 
 @receiver(post_save, sender=User)
@@ -54,7 +54,7 @@ class Task(models.Model):
     title = models.CharField(max_length=150)
     description = models.TextField(null=True,blank=True)
     project = models.ForeignKey(Project,null=True,blank=True, on_delete=models.CASCADE)
-    assignee = models.ForeignKey(User, null=True,blank=True, on_delete=models.SET_NULL)
+    assignee = models.ForeignKey(Profile, null=True,blank=True, on_delete=models.SET_NULL)
     date_created = models.DateTimeField(auto_now_add=True)
     due_date = models.DateField(null=True,blank=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES,null=True,blank=True,default= TODO)
