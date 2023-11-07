@@ -7,6 +7,8 @@ urlpatterns = [
 
     path('profile/', views.userProfile, name='user-profile'),
     path('users/', views.userList, name='user-list'),
+    path('create-profile/', views.create_profile, name='create-profile'),
+    #path('profile-created/', views.profile_created, name='profile-created'),
 
     path('projects', views.projectList, name='projects'),
     path('projects/<int:pk>', views.projectDetail, name='project-detail'), 

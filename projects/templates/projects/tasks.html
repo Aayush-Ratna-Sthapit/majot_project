@@ -14,10 +14,12 @@
                         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check" height="60px" width="60px"/>
                         <h1 class="mx-3" style="display: inline-block; vertical-align: middle;">Task List</h1>
                      </div>
-                     <div class="text-center my-3">
-                        <a class="nav-link btn btn-primary text-light" href={% url 'create-task'%}>Add Task</a>
-                     </div>
-                     <select class="form-select mt-2" id="assignee-filter" name="assignee-filter">
+                     {% if request.user.profile.position != 'employee' %}
+                        <div class="text-center my-3">
+                           <a class="nav-link btn btn-primary text-light" href={% url 'create-profile'%}>Add Task</a>
+                        </div>
+                     {% endif %}
+                     <select class="form-select my-3" id="assignee-filter" name="assignee-filter">
                         <option value="">All Assignees</option>
                         {% for assignee in assignees %}
                            <option value="{{ assignee.name }}">{{ assignee.name }}</option>

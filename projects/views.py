@@ -178,3 +178,30 @@ def home(request):
  
 def projects(request):
   return render(request, 'projects/projects.html')
+
+
+from .forms import ProfileForm, UserForm
+from django.contrib.auth.models import User
+
+def create_profile(request):
+    if request.method == 'POST':
+        profile_form = ProfileForm(request.POST, request.FILES)
+        user_form = UserForm(request.POST)
+
+        if profile_form.is_valid() and user_form.is_valid():
+            user = user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            return redirect('user-list')
+
+    else:
+        profile_form = ProfileForm()
+        user_form = UserForm()
+
+    context = {
+        'profile_form': profile_form,
+        'user_form': user_form,
+    }
+
+    return render(request, 'users/create-profile.html', context)

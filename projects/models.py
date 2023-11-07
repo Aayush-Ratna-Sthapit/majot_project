@@ -23,10 +23,17 @@ class Profile(models.Model):
         return str(self.name)
 
 
-@receiver(post_save, sender=User)
+'''@receiver(post_save, sender=User)
 def update_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance)
+        # Check if a profile with the same user already exists
+        profile, _ = Profile.objects.get_or_create(user=instance)
+        profile.name = instance.username
+        profile.save()
+    else:
+        # If the User instance already existed, you can update the related Profile here.
+        instance.profile.name = instance.username
+        instance.profile.save()'''
         
 
 class Project(models.Model):

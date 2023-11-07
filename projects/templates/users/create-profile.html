@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+   <div class="container">
+       <div class="row my-5">
+           <div class="col-md-12">
+               <form method="post" enctype="multipart/form-data" class="form">
+                   {% csrf_token %}
+                   {{ profile_form.name|as_crispy_field }}
+                   {{ profile_form.position|as_crispy_field }}
+                   {{ profile_form.email|as_crispy_field }}
+                   {{ profile_form.photo|as_crispy_field }}
+                   {{ profile_form.bio|as_crispy_field }}
+                   {{ user_form|crispy }}
+                   <button type="button" id="show-hide-password" class="btn btn-secondary">Show</button>
+                   <button type="submit" class="btn btn-primary">Create User</button>
+               </form>
+           </div>
+       </div>
+   </div>
+{% endblock %}
