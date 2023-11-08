@@ -39,7 +39,7 @@
                       <td class="border-0">{{ user.email }}</td>
                       <td class="border-0">{{ user.position }}</td>
                       <td class="border-0">
-                        <a class="btn btn-success" href="" data-mdb-toggle="tooltip" title="Update">Update</a>
+                        <a class="btn btn-success" href="{% url 'update-profile' %}" data-mdb-toggle="tooltip" title="Update">Update</a>
                       </td>
                     </tr>
                   {% endfor %}
